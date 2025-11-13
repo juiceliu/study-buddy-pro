@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Study Buddy Pro",
+  "version": "11.0",
+  "description": "Offline, client-side AI study assistant with camera OCR and flashcards",
+  "action": { 
+    "default_popup": "index.html",
+    "default_title": "Study Buddy Pro"
+  },
+  "permissions": ["storage", "activeTab", "contextMenus"],
+  "host_permissions": ["https://docs.google.com/*"],
+  "background": { 
+    "service_worker": "background.js"
+  },
+  "content_scripts": [{
+    "matches": ["https://docs.google.com/*"],
+    "js": ["content.js"],
+    "run_at": "document_end"
+  }],
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+  },
+  "web_accessible_resources": [{
+    "resources": ["index.html", "main.js", "icon.png"],
+    "matches": ["<all_urls>"]
+  }]
+}
